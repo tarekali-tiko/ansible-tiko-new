@@ -1,0 +1,19 @@
+---
+- name: install flatpak and remote and install chrome
+  hosts: serverd
+  tasks:
+    - name: ensure flatpak is installed
+      package:
+        name: flatpak
+        state: present
+    - name: to remote flatpak
+      flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+    - name: install vlc
+      flatpak:
+        name: org.videolan.VLC
+        state: present
+        remote: flathub
